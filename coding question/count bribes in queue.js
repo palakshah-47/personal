@@ -55,4 +55,4 @@ function minimumBribe(arr) {
     return bribes;
 }
  
-console.log(minimumBribe([1,2,5,3,4,6,7,8]))
+console.log(minimumBribe([2,1,5,3,4]))
