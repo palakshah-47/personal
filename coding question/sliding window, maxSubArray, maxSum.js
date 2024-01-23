@@ -2,94 +2,115 @@
 //  let maxSum = Number.MIN_VALUE;
 
 //  let maxGlobal = Number.MIN_VALUE;
- 
-//  for( let i = 1; i < array.length; i++){  
+
+//  for( let i = 1; i < array.length; i++){
 //      let maxCurrent = 0;
-//      for(let j = 1 ; j < numlength; j++){         
-//          maxCurrent = maxCurrent + array[i-1] + + array[i];         
+//      for(let j = 1 ; j < numlength; j++){
+//          maxCurrent = maxCurrent + array[i-1] + + array[i];
 //      }
 //      if(maxCurrent > maxGlobal){
-//          maxGlobal = maxCurrent;            
-//      }   
- 
+//          maxGlobal = maxCurrent;
+//      }
+
 //  }
-//      return maxGlobal;  
+//      return maxGlobal;
 
 // }
 
+// function maxSubarraySum(arr, num) {
+//   if (arr.length < num) return null;
 
-function maxSubarraySum(arr, num){
-    if (arr.length < num) return null;
- 
-    let total = 0;
-    for (let i=0; i<num; i++){
-       total += arr[i];
+//   let total = 0;
+//   for (let i = 0; i < num; i++) {
+//     total += arr[i];
+//   }
+
+//   let currentTotal = total;
+//   for (let i = num; i < arr.length; i++) {
+//     currentTotal += arr[i] - arr[i - num];
+//     total = Math.max(total, currentTotal);
+//   }
+//   return total;
+// }
+
+// console.log(maxSubarraySum([-3, 4, 0, -2, 6, -1], 2));
+
+//sliding window, Kadane's algorithm
+const maxSubArrayLen = (arr) => {
+  let maxSum = -Infinity;
+  let maxL = 0,
+    maxR = 0;
+  let currTotal = 0;
+  let l = 0;
+
+  for (let r = 0; r < arr.length; r++) {
+    currTotal += arr[r];
+    if (currTotal < arr[r]) {
+      currTotal = arr[r];
+      l = r;
     }
-    let currentTotal = total;
-    for (let i = num; i < arr.length; i++) {
-       currentTotal += arr[i] - arr[i-num];
-       total = Math.max(total, currentTotal);
+    if (currTotal > maxSum) {
+      maxSum = currTotal;
+      maxL = l;
+      maxR = r;
     }
-    return total;
-}
-
- console.log(maxSubarraySum([-3,4,0,-2,6,-1], 2));
-
+  }
+  return [maxL, maxR];
+};
+console.log(maxSubArrayLen([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
 // function minSubArrayLen(array, sumVal){
 //     if(array.length === 0) return 0;
 //     let lenCount = Number.MAX_VALUE;
 //     let sum = 0;
 //     let = left = 0;
-//     for(let i = 0 ; i < array.length; i++){    
-//         sum = sum + array[i];  
+//     for(let i = 0 ; i < array.length; i++){
+//         sum = sum + array[i];
 //          while(sum >= sumVal) {
 //           lenCount = Math.min(lenCount, i+1 - left);
 //           sum = sum - array[left];
 //           left++;
 //         }
 //     }
-   
+
 //     return (lenCount != Number.MAX_VALUE) ? lenCount : 0;
 // }
 
-
 // console.log(minSubArrayLen([4,3,3,8,1,2,3], 11));
 
-// var maxSubArray = function(nums) {
-//     let maxGlobal = Number.MIN_VALUE;
-//     let maxSum = 0;     
-//     for( var i = 0 ; i < nums.length; i++){        
-//         maxSum += nums[i];
-//         if(maxSum < nums[i]){
-//             maxSum = nums[i];
+var maxSubArray = function (nums) {
+  let maxGlobal = Number.MIN_VALUE;
+  let maxSum = 0;
+  for (var i = 0; i < nums.length; i++) {
+    maxSum += nums[i];
+    if (maxSum < nums[i]) {
+      maxSum = nums[i];
+    }
+
+    maxGlobal = Math.max(maxGlobal, maxSum);
+  }
+  return maxGlobal;
+};
+
+//ans = 6
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+
+// function maxsubArrayWithSum(arr, target){
+//         let maxSum = Number.MIN_VALUE;
+//         let result = [];
+//         let j = 0;
+//         for(let i = 0; i < arr.length; i++){
+//             maxSum += arr[i];
+//             while(maxSum >= target && j < arr.length){
+//                 if(maxSum === target){
+//                     return [j+1, i+1];
+//                 }
+//                 maxSum = maxSum - arr[j];
+//                 j++;
+
+//             }
 //         }
-                  
-//        maxGlobal = Math.max(maxGlobal, maxSum);
-//     }
-//     return maxGlobal;
-    
-// };
-
-// console.log(maxSubArray([ -2, -3, 4, -1, -2, 1, 5, -3 ]));
-
-function maxsubArrayWithSum(arr, target){
-        let maxSum = Number.MIN_VALUE;       
-        let result = [];
-        let j = 0;
-        for(let i = 0; i < arr.length; i++){
-            maxSum += arr[i];
-            while(maxSum >= target && j < arr.length){
-                if(maxSum === target){
-                    return [j+1, i+1];
-                }
-                maxSum = maxSum - arr[j];
-                j++;
-                
-                
-            }
-        }
-       return [-1];
-}
+//        return [-1];
+// }
 
 // function findLongestSubstring(str){
 //   if(!Object.keys(str).length) return 0;
@@ -112,4 +133,4 @@ function maxsubArrayWithSum(arr, target){
 // }
 
 // console.log(findLongestSubstring('thisisawesome'));
- console.log(maxsubArrayWithSum([1, 2, 3, 7, 5], 12));
+// console.log(maxsubArrayWithSum([1, 2, 3, 7, 5], 12));

@@ -17,17 +17,31 @@ function missingNo(nums) {
 //         }
 //     }
 //     return -1;
-    let xor = nums.length;
-    for (let i = 0; i < nums.length; i++){
-        xor = xor ^ i ^ nums[i];
-    }
-    return xor;
+    // let xor = nums.length;
+    // for (let i = 0; i < nums.length; i++){
+    //     xor = xor ^ i ^ nums[i];
+    // }
+    // return xor;
 
     // let sum = nums.length;
     // for (let i = 0; i < nums.length; i++){
     //     sum += i - nums[i];
     // }
     // return sum;
+
+    // let n = nums.length;
+    // let sum = (n * (n+1))/2;
+
+    // for(let e of nums){
+    //     sum -= e;
+    // }
+    // return sum;
+
+    let res = new Array(nums.length+1).fill(-1);
+    for(let num of nums){
+        res[num] = num;
+    }
+    return res.indexOf(-1);
 }
 
 console.log(missingNo([3, 0, 1]));
