@@ -17,23 +17,23 @@
 
 // }
 
-// function maxSubarraySum(arr, num) {
-//   if (arr.length < num) return null;
+function maxSubarraySum(arr, num) {
+  if (arr.length < num) return null;
 
-//   let total = 0;
-//   for (let i = 0; i < num; i++) {
-//     total += arr[i];
-//   }
+  let total = 0;
+  for (let i = 0; i < num; i++) {
+    total += arr[i];
+  }
 
-//   let currentTotal = total;
-//   for (let i = num; i < arr.length; i++) {
-//     currentTotal += arr[i] - arr[i - num];
-//     total = Math.max(total, currentTotal);
-//   }
-//   return total;
-// }
+  let currentTotal = total;
+  for (let i = num; i < arr.length; i++) {
+    currentTotal += arr[i] - arr[i - num];
+    total = Math.max(total, currentTotal);
+  }
+  return total;
+}
 
-// console.log(maxSubarraySum([-3, 4, 0, -2, 6, -1], 2));
+console.log(maxSubarraySum([-3, 4, 0, -2, 6, -1], 2));
 
 //sliding window, Kadane's algorithm
 const maxSubArrayLen = (arr) => {
@@ -94,23 +94,22 @@ var maxSubArray = function (nums) {
 //ans = 6
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
 
-// function maxsubArrayWithSum(arr, target){
-//         let maxSum = Number.MIN_VALUE;
-//         let result = [];
-//         let j = 0;
-//         for(let i = 0; i < arr.length; i++){
-//             maxSum += arr[i];
-//             while(maxSum >= target && j < arr.length){
-//                 if(maxSum === target){
-//                     return [j+1, i+1];
-//                 }
-//                 maxSum = maxSum - arr[j];
-//                 j++;
-
-//             }
-//         }
-//        return [-1];
-// }
+function maxsubArrayWithSum(arr, target) {
+  let maxSum = 0;
+  let result = [];
+  let j = 0;
+  for (let i = 0; i < arr.length; i++) {
+    maxSum += arr[i];
+    while (maxSum >= target && j < arr.length) {
+      if (maxSum === target) {
+        return [j + 1, i + 1];
+      }
+      maxSum = maxSum - arr[j];
+      j++;
+    }
+  }
+  return [-1];
+}
 
 // function findLongestSubstring(str){
 //   if(!Object.keys(str).length) return 0;
@@ -133,4 +132,4 @@ console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
 // }
 
 // console.log(findLongestSubstring('thisisawesome'));
-// console.log(maxsubArrayWithSum([1, 2, 3, 7, 5], 12));
+console.log(maxsubArrayWithSum([1, 2, 3, 7, 5], 12));
