@@ -8,7 +8,7 @@ function permute(nums) {
   let res = [];
   function dfs(curr, rest) {
     if (rest.length === 0) {
-      res.push(curr);
+      res.push(curr.join(''));
       return;
     }
     for (let i = 0; i < rest.length; i++) {

@@ -1,10 +1,20 @@
 /*
-* Given two strings s and t of lengths m and n respectively, return the minimum window substring of 
-s such that every character in t (including duplicates) is included in the window.
- If there is no such substring, return the empty string "".
-Input: s = "ADOBECODEBANC", t = "ABC"
-Output: "BANC"
-Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+You are given two strings s and t. You can select any substring of string s and rearrange the 
+characters of the selected substring. Determine the minimum length of the substring of s such that 
+string t is a substring of the selected substring.
+Signature
+int minLengthSubstring(String s, String t)
+Input
+s and t are non-empty strings that contain less than 1,000,000 characters each
+Output
+Return the minimum length of the substring of s. If it is not possible, return -1
+Example
+s = "dcbefebce"
+t = "fd"
+output = 5
+Explanation:
+Substring "dcbef" can be rearranged to "cfdeb", "cefdb", and so on. 
+String t is a substring of "cfdeb". Thus, the minimum length required is 5.
 */
 
 /**
@@ -55,4 +65,4 @@ function minWindow(s, t) {
   return minSubStr;
 }
 
-console.log(minWindow('ADOBECODEBANC', 'ABC'));
+console.log(minWindow('dcbefebce', 'fd'));
