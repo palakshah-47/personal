@@ -30,21 +30,28 @@ function sortByOrder(inputStr, order) {
     let value = arr[ch.charCodeAt(0) - 97] || 0;
 
     if (value > 1) {
-      for (let j = 0; j < value; j++) {
-        output += ch;
-      }
+      // for (let j = 0; j < value; j++) {
+      //   output += ch;
+      // }
+      output += ch.repeat(value);
     } else {
       output += ch;
     }
     arr[ch.charCodeAt(0) - 97] = 0;
   }
 
-  Object.entries(arr).forEach(([key, val]) => {
-    if (val > 0) {
+  // Object.entries(arr).forEach(([key, val]) => {
+  //   if (val > 0) {
+  //     let ch = String.fromCharCode(Number(key) + 97);
+  //     output += ch;
+  //   }
+  // });
+  for (const key in arr) {
+    if (arr[key] > 0) {
       let ch = String.fromCharCode(Number(key) + 97);
       output += ch;
     }
-  });
+  }
 
   return output;
 }
