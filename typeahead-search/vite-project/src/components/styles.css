@@ -1,0 +1,49 @@
+.container {
+  position: relative;
+  width: 300px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container > input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.2em;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.error {
+  padding: 10px;
+  font-size: 14px;
+  color: red;
+}
+
+.loading {
+  color: #5555;
+}
+
+.suggestions-list {
+  position: absolute;
+  width: 105%;
+  padding: 0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-top: none;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background: #fff;
+  z-index: 10;
+  overflow-y: auto;
+  margin: 0;
+  list-style: none;
+}
+
+.suggestions-item {
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: start;
+}
+
+.suggestions-item:hover {
+  background-color: #f0f0f0;
+}
