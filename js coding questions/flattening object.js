@@ -18,24 +18,26 @@ const flattenObj = (obj) => {
       for (let y in flatObject) {
         flatObj[key + '_' + y] = flatObject[y];
       }
-      //   if (parentKey) {
-      //     flatObj = {
-      //       ...flatObj,
-      //       ...flattenObj(obj[key], `${parentKey}_${key}`),
-      //     };
-      //   } else {
-      //     flatObj = { ...flatObj, ...flattenObj(obj[key], key) };
-      //   }
     } else {
-      //   if (parentKey) {
-      //     flatObj[`${parentKey}_${key}`] = obj[key];
-      //   }
-      //   else {
       flatObj[key] = obj[key];
-      //   }
     }
   }
   return flatObj;
 };
 
-console.log(flattenObj({ a: 1, b: { c: 2, d: { e: 3 } } }));
+const flattenObj1 = (obj, parentKey = '', result = {}) => {
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const newKey = parentKey ? `${parentKey}_${key}` : key;
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        flattenObj1(obj[key], newKey, result);
+      } else {
+        result[newKey] = obj[key];
+      }
+    }
+  }
+  return result;
+};
+
+// console.log(flattenObj({ a: 1, b: { c: 2, d: { e: 3 } } }));
+console.log(flattenObj1({ a: 1, b: { c: 2, d: { e: 3 } } }));

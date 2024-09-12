@@ -8,40 +8,61 @@ Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0
 */
 
 function missingNo(nums) {
-//    let len = nums.length;
-//     if(nums.indexOf(len) === -1) return len;
-//     nums.sort((a,b) => a-b);
-//     for(let i = 0; i < nums.length; i++){
-//         if(nums[i] !== i){
-//             return i;
-//         }
-//     }
-//     return -1;
-    // let xor = nums.length;
-    // for (let i = 0; i < nums.length; i++){
-    //     xor = xor ^ i ^ nums[i];
-    // }
-    // return xor;
+  //    let len = nums.length;
+  //     if(nums.indexOf(len) === -1) return len;
+  //     nums.sort((a,b) => a-b);
+  //     for(let i = 0; i < nums.length; i++){
+  //         if(nums[i] !== i){
+  //             return i;
+  //         }
+  //     }
+  //     return -1;
+  // let xor = nums.length;
+  // for (let i = 0; i < nums.length; i++){
+  //     xor = xor ^ i ^ nums[i];
+  // }
+  // return xor;
 
-    // let sum = nums.length;
-    // for (let i = 0; i < nums.length; i++){
-    //     sum += i - nums[i];
-    // }
-    // return sum;
+  // let sum = nums.length;
+  // for (let i = 0; i < nums.length; i++){
+  //     sum += i - nums[i];
+  // }
+  // return sum;
 
-    // let n = nums.length;
-    // let sum = (n * (n+1))/2;
+  // let n = nums.length;
+  // let sum = (n * (n+1))/2;
 
-    // for(let e of nums){
-    //     sum -= e;
-    // }
-    // return sum;
+  // for(let e of nums){
+  //     sum -= e;
+  // }
+  // return sum;
 
-    let res = new Array(nums.length+1).fill(-1);
-    for(let num of nums){
-        res[num] = num;
+  // let res = new Array(nums.length+1).fill(-1);
+  // for(let num of nums){
+  //     res[num] = num;
+  // }
+  // return res.indexOf(-1);
+
+  const n = nums.length;
+  let temp = 0;
+  for (let i = 0; i < n; i++) {
+    temp = nums[i];
+    while (temp < n && nums[temp] !== temp) {
+      [temp, nums[temp]] = [nums[temp], temp];
     }
-    return res.indexOf(-1);
+  }
+
+  for (let i = 0; i < n; i++) {
+    if (nums[i] !== i) return i;
+  }
+  return n;
+  //   let set = new Set();
+  //   for (let num of nums) {
+  //     set.add(num);
+  //   }
+  //   for (let i = 0; i <= n; i++) {
+  //     if (!set.has(i)) return i;
+  //   }
 }
 
 console.log(missingNo([3, 0, 1]));
