@@ -27,11 +27,12 @@ const isValidSudoku = (board) => {
         const col = `col: ${j}, value: ${val}`;
         const boxNumber = 3 * Math.floor(i / 3) + Math.floor(j / 3);
         const box = `boxNumber: ${boxNumber}, value:${val}`;
-        if (set.has(row) || set.has(col) || set.has(boxNumber)) return false;
+        if (set.has(row) || set.has(col) || set.has(box)) return false;
         set.add(row).add(col).add(box);
       }
     }
   }
+  return true;
 };
 
 console.log(

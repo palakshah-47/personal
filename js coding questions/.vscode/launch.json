@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\Paint Building with 4 buildings.js"
+      "program": "${workspaceFolder}\\Number of islands.js"
     }
   ]
 }

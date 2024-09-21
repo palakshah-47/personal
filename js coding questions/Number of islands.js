@@ -16,71 +16,69 @@ Output: 3
  * @param {character[][]} grid
  * @return {number}
  */
-// var numIslands = function(grid) {
+var numIslands = function (grid) {
+  let count = 0;
+  let row = grid.length;
+  let col = grid[0].length;
 
-//     let count = 0;
-//     let row = grid.length;
-//     let col = grid[0].length;
+  for (let r = 0; r < row; r++) {
+    for (let c = 0; c < col; c++) {
+      if (grid[r][c] === '1') {
+        count++;
+        dfs(grid, r, c, row, col);
+      }
+    }
+  }
 
-//     for(let r = 0; r < row; r++){
-//         for(let c = 0; c < col; c++){
-//             if(grid[r][c] === '1') {
-//                 count++;
-//                 dfs(grid, r, c, row, col);
-//             }
-//         }
-//     }
+  return count;
+};
 
-//     return count;
-// };
+var dfs = function (grid, r, c, row, col) {
+  if (r < 0 || c < 0 || r >= row || c >= col || grid[r][c] === '0') return;
 
-// var dfs = function (grid, r, c, row, col) {
-//         if(r < 0 || c < 0 || r >= row || c >= col || grid[r][c] === '0' ) return;
+  grid[r][c] = '0';
 
-//         grid[r][c] = '0';
-
-//         dfs(grid, r+1, c, row, col);
-//         dfs(grid, r-1, c, row, col);
-//         dfs(grid, r, c+1, row, col);
-//         dfs(grid, r, c-1, row, col);
-
-//     }
+  dfs(grid, r + 1, c, row, col);
+  dfs(grid, r - 1, c, row, col);
+  dfs(grid, r, c + 1, row, col);
+  dfs(grid, r, c - 1, row, col);
+};
 
 // /**
 //  * @param {character[][]} grid
 //  * @return {number}
 //  */
-var numIslands = function (grid) {
-  if (grid.length === 0) return 0;
+// var numIslands = function (grid) {
+//   if (grid.length === 0) return 0;
 
-  let noOfIslands = 0;
+//   let noOfIslands = 0;
 
-  for (let [rowIndex] of grid.entries()) {
-    for (let [colIndex] of grid[rowIndex].entries()) {
-      if (grid[rowIndex][colIndex] === '1') {
-        noOfIslands++;
-        convertIslandToWater(grid, rowIndex, colIndex);
-        debugger;
-      }
-    }
-  }
-  return noOfIslands;
-};
+//   for (let [rowIndex] of grid.entries()) {
+//     for (let [colIndex] of grid[rowIndex].entries()) {
+//       if (grid[rowIndex][colIndex] === '1') {
+//         noOfIslands++;
+//         convertIslandToWater(grid, rowIndex, colIndex);
+//         debugger;
+//       }
+//     }
+//   }
+//   return noOfIslands;
+// };
 
-let convertIslandToWater = function (grid, rowIndex, columnIndex) {
-  if (
-    grid[rowIndex] === undefined ||
-    grid[rowIndex][columnIndex] === undefined ||
-    grid[rowIndex][columnIndex] === '0'
-  )
-    return;
+// let convertIslandToWater = function (grid, rowIndex, columnIndex) {
+//   if (
+//     grid[rowIndex] === undefined ||
+//     grid[rowIndex][columnIndex] === undefined ||
+//     grid[rowIndex][columnIndex] === '0'
+//   )
+//     return;
 
-  grid[rowIndex][columnIndex] = '0';
-  convertIslandToWater(grid, rowIndex + 1, columnIndex);
-  convertIslandToWater(grid, rowIndex - 1, columnIndex);
-  convertIslandToWater(grid, rowIndex, columnIndex + 1);
-  convertIslandToWater(grid, rowIndex, columnIndex - 1);
-};
+//   grid[rowIndex][columnIndex] = '0';
+//   convertIslandToWater(grid, rowIndex + 1, columnIndex);
+//   convertIslandToWater(grid, rowIndex - 1, columnIndex);
+//   convertIslandToWater(grid, rowIndex, columnIndex + 1);
+//   convertIslandToWater(grid, rowIndex, columnIndex - 1);
+// };
 
 // class Solution
 // {
@@ -119,6 +117,7 @@ console.log(
     ['0', '0', '0', '1', '1'],
   ])
 );
+console.log(numIslands);
 
 // let sol = new Solution();
 // console.log(sol.xShape([['X','O','X'], ['O', 'X', 'O'], ['X', 'X', 'X']]));
