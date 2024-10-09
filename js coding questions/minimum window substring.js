@@ -55,4 +55,5 @@ function minWindow(s, t) {
   return minSubStr;
 }
 
-console.log(minWindow('ADOBECODEBANC', 'ABC'));
+// console.log(minWindow('ADOBECODEBANC', 'ABC'));
+console.log(minWindow('ADOBECODEBANCDDD', ['A', 'B', 'C'].join('')));
