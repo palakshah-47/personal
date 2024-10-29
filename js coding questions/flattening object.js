@@ -28,7 +28,11 @@ const flattenObj = (obj) => {
 const flattenObj1 = (obj, parentKey = '', result = {}) => {
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
-      const newKey = parentKey ? `${parentKey}_${key}` : key;
+      const newKey = parentKey
+        ? key
+          ? `${parentKey}_${key}`
+          : parentKey
+        : key;
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         flattenObj1(obj[key], newKey, result);
       } else {
@@ -40,4 +44,4 @@ const flattenObj1 = (obj, parentKey = '', result = {}) => {
 };
 
 // console.log(flattenObj({ a: 1, b: { c: 2, d: { e: 3 } } }));
-console.log(flattenObj1({ a: 1, b: { c: 2, d: { e: 3 } } }));
+console.log(flattenObj1({ a: 1, b: { c: 2, '': { e: 3 } } }));

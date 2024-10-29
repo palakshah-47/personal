@@ -1,4 +1,10 @@
-import { FunctionComponent, ChangeEvent, useState, useEffect } from 'react';
+import {
+  FunctionComponent,
+  ChangeEvent,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import { AutoCompleteProps } from '../types';
 import './styles.css';
 import { SuggestionsList } from './SuggestionsList';
@@ -30,36 +36,43 @@ const AutoComplete: FunctionComponent<AutoCompleteProps> = ({
   ) => {
     let timeoutId: number;
     return (...args: string[]) => {
+      if (timeoutId) console.log('immediately debounce called');
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => callback(...args), delay);
+      timeoutId = setTimeout(() => {
+        console.log(...args);
+        callback(...args);
+      }, delay);
     };
   };
 
-  useEffect(() => {
-    const getSuggestions = debounce(async () => {
-      setError('');
-      setLoading(true);
-      try {
-        const result = (await fetchSuggestions(inputValue)) ?? [];
-        if (Array.isArray(result)) {
-          setSuggestions(result);
-        } else {
-          throw new Error('Invalid suggestions format');
-        }
-      } catch (error) {
-        setError('Failed to fetch suggestions');
-        setSuggestions([]);
-      } finally {
-        setLoading(false);
+  // useEffect(() => {
+  const getSuggestions = async (query: string) => {
+    setError('');
+    setLoading(true);
+    try {
+      const result = (await fetchSuggestions(query)) ?? [];
+      if (Array.isArray(result)) {
+        setSuggestions(result);
+      } else {
+        throw new Error('Invalid suggestions format');
       }
-    }, 300);
-
-    if (inputValue.length > 1) {
-      getSuggestions();
-    } else {
+    } catch (error) {
+      setError('Failed to fetch suggestions');
       setSuggestions([]);
+    } finally {
+      setLoading(false);
     }
-  }, [inputValue, fetchSuggestions]);
+  };
+
+  // Create a debounced version of fetchData
+  const debouncedFetchData = useCallback(debounce(getSuggestions, 3000), []);
+
+  // useEffect to call debounced function when query changes
+  useEffect(() => {
+    if (inputValue) {
+      debouncedFetchData(inputValue);
+    }
+  }, [inputValue, debouncedFetchData]);
 
   const handleSuggestionClick = (suggestion: { [key: string]: unknown }) => {
     setInputValue(
