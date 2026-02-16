@@ -12,6 +12,7 @@ const canWeSegmentString = (string, dictionary) => {
 		let word = '';
 		for (let i = index; i < string.length; i++) {
 			word += string[i];
+			console.log('word: ', word);
 			if (dictionary[word]) {
 				const result = checkStringRecursively(i + 1, currentString + word + ' ');
 				console.log('result: ', result);
@@ -22,28 +23,28 @@ const canWeSegmentString = (string, dictionary) => {
 		}
 		return null;
 
-        // dp version
-        // if (index === string.length) {
-        //     return '';
-        // }
-        // if (index in memo) {
-        //     return memo[index];
-        // }
+		// dp version
+		// if (index === string.length) {
+		//     return '';
+		// }
+		// if (index in memo) {
+		//     return memo[index];
+		// }
 
-        // let word = '';
-        // for (let i = index; i < string.length; i++) {
-        //     word += string[i];
-        //     if (dictionary[word]) {
-        //         const result = checkStringRecursively(i + 1);
-        //         if (result !== null) {
-        //             memo[index] = word + (result ? ' ' + result : '');
-        //             return memo[index];
-        //         }
-        //     }
-        // }
+		// let word = '';
+		// for (let i = index; i < string.length; i++) {
+		//     word += string[i];
+		//     if (dictionary[word]) {
+		//         const result = checkStringRecursively(i + 1);
+		//         if (result !== null) {
+		//             memo[index] = word + (result ? ' ' + result : '');
+		//             return memo[index];
+		//         }
+		//     }
+		// }
 
-        // memo[index] = null;
-        // return null;
+		// memo[index] = null;
+		// return null;
 	};
 
 	const result = checkStringRecursively(0, '');

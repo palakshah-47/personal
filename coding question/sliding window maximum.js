@@ -4,24 +4,25 @@
  * @return {number[]}
  */
 var maxSlidingWindow = function(nums, k) {
-    let res = [], start = 0;
-    let partial = [];
-    for(let end = 0; end < nums.length; end++){        
-        partial.push(nums[end]);
-        k--;        
-        if(k <= 0 && start < nums.length){
-           let temp = [...partial];
-           res = [...res, temp];
-           partial.splice(0, 1);
-            start++;
-            k++;
+    // [1,3,-1,-3,5,3,6,7]
+    const res = [];
+    const deque = [];
+    for(let right = 0; right < nums.length; right++) {      
+        // Remove indices whose corresponding values are less than nums[right]
+        while(deque.length > 0 && nums[deque[deque.length - 1]] < nums[right]) {
+            deque.pop();
+        }
+        deque.push(right);
+        // Remove indices that are out of the current window
+        const left = right - k + 1;
+        if(deque[0] < left) {
+            deque.shift();
+        }
+        // If we have processed at least k elements, add the maximum to result
+        if(right >= k - 1) {
+            res.push(nums[deque[0]]);
         }
     }
-    let maxWindow = res.reduce((acc, val) => {        
-        acc.push(Math.max(...val));
-        return acc;
-    }, []);
-    return maxWindow;
+    return res;
 };
-
 console.log(maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3));
